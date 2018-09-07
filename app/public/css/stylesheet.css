@@ -61,6 +61,11 @@ table {
 
 /* ========================= HTML TAGS ======================== */
 
+* {
+	/*Allow padding to be included in total width/height */
+	box-sizing: border-box;
+}
+
 html, body {
 	overflow: hidden;
 }
@@ -76,17 +81,18 @@ html, body {
 
 /* The image for the instrument */
 .loading-screen-container img {
-	/* Center vertically and horizontally */
+	max-height: 100%;
+	max-width: 200px;
+	/*max-width: 300px;*/
+}
+
+.center {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin-right: -50%;
 	transform: translate(-50%, -50%);
-
-	max-height: 100%;
-	max-width: 300px;
 }
-
 
 /* Animated music note.
    Inspired by https://codepen.io/MaryG/pen/wJMMdw */
@@ -94,29 +100,20 @@ html, body {
 	display: block;
 	margin: auto;
 	border: 0px solid #000;
-
-
 	height: 100px;
 	width: 100px;
 
-	/* Make in center of screen */
-	position: absolute;
+	/* Move slightly down and to the right */
 	top: 52%;
-	left: 58%;
-	margin-right: -50%;
-	transform: translate(-50%, -50%);
+	left: 80%;
 }
 
 .music-note {
 	position: absolute;
-	animation: notes 2s infinite linear;
-	font-size: 40px;
+	animation: notes 1s infinite linear;
+	font-size: 35px;
 	opacity: 0;
-
-	/*top: 60px;*/
-	/*top: 60px;
-	left: 0;*/
-	animation-delay: 0.5s;
+	/*animation-delay: 0.25s;*/
 }
 
 @keyframes notes {
@@ -138,42 +135,43 @@ html, body {
   }
 }
 
+/* Loading bar
+   Inspired by https://codepen.io/zFunx/pen/oZaqqz */
+.load-bar {
+	width: 220px;
+	height: 5px;
+
+	top: 75%;
+	background: linear-gradient(to right, gold, gold);
+	background-color: #ccc;
+	background-repeat: repeat-y;
+	background-position: -25% 0;
+	background-size: 30%;
+	animation: loading 1s ease-in-out infinite;
+}
+
+@keyframes loading {
+	50% { background-size: 60%; }
+	100% { background-position: 125% 0; }
+}
+
 
 /* ======================= MEDIA QUERIES ======================= */
 
-/* Resize instrument images on certain smartphones */
-@media only screen and (max-width: 480px) {
-	.loading-screen-container img {
-		max-width: 200px;
-	}
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-	.music-note-container {
-		top: 52%;
-		left: 80%;
-	}
-	.music-note {
-		font-size: 35px;
-	}
-} 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 	.music-note-container {
-		top: 52%;
 		left: 75%;
 	}
-	.music-note {
-		font-size: 35px;
+	.loading-screen-container img {
+		max-width: 300px;
 	}
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 	.music-note-container {
-		top: 52%;
 		left: 70%;
 	}
 } 
@@ -181,7 +179,6 @@ html, body {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 	.music-note-container {
-		top: 52%;
 		left: 65%;
 	}
 } 
@@ -189,7 +186,6 @@ html, body {
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 	.music-note-container {
-		top: 52%;
 		left: 58%;
 	}
 }
