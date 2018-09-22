@@ -68,13 +68,38 @@ table {
 
 html, body {
 	overflow: hidden;
-	background-color: #000;
+	background-color: gray;
 	height: 100%; /* Used for the full page background */
 	color: white;
 }
 
 body {
 	font-family: 'Roboto', 'Open Sans', sans-serif;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+
+/* For Font Awesome icons */
+i {
+	color: #DC143C;
+	position: absolute;
+	padding: 5px;
+	font-size: 30px !important;
+    
+}
+
+/* Shift placeholder to the right */
+input {
+    text-indent: 30px;
+    border: 1px solid black;
+    font-size: 18px;
+}
+input:focus {
+	outline: none !important;
+	border: 1px solid #DC143C;
 }
 
 
@@ -167,7 +192,8 @@ body {
 /* --- Main Page --- */
 
 /* Full screen background image */
-.bg {
+.bg
+{
 	background-image: url('../assets/images/main-screen/backgrounds/trombone-marine-band.JPG');
 	height: 100%;
 
@@ -184,14 +210,23 @@ body {
 	position: relative;
 }
 
-.search-text {
+.search-bar {
 	width: 100%;
 	height: 100%;
-	/*padding: 10px 20px;
-	background: white;
-	border-radius: 3px;
-	box-shadow: 0px 8px 15px rgba($tundora, 0.1);*/
 }
+
+.main-page-message {
+	width: 300px;
+	height: 75px;
+	position: relative;
+	text-align: center;
+}
+
+.crimson {
+	display: inline;
+	color: #DC143C;
+}
+
 
 
 /* ======================= MEDIA QUERIES ======================= */
@@ -209,16 +244,33 @@ body {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+	h1 {
+		font-size: 28px;
+	}
+
 	.music-note-container {
 		left: 70%;
 	}
 	.search-container {
 		width: 500px;
 	}
+	.main-page-message {
+		width: 500px;
+		height: 50px;
+	}
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+	i {
+		color: #DC143C;
+		position: absolute;
+
+		padding: 10px;
+		font-size: 30px !important;
+    
+	}
+
 	.music-note-container {
 		left: 65%;
 	}
@@ -226,7 +278,11 @@ body {
 		width: 260px;
 	}
 	.search-container {
-		width: 500px;
+		width: 600px;
+		height: 50px;
+	}
+	.main-page-message {
+		width: 600px;
 	}
 } 
 
