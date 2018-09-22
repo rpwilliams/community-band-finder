@@ -70,8 +70,11 @@ html, body {
 	overflow: hidden;
 	background-color: #000;
 	height: 100%; /* Used for the full page background */
-	font-family: 'Roboto', 'Open Sans', sans-serif;
 	color: white;
+}
+
+body {
+	font-family: 'Roboto', 'Open Sans', sans-serif;
 }
 
 
@@ -176,7 +179,7 @@ html, body {
 }
 
 .search-container {
-	width: 500px;
+	width: 300px;
 	height: 40px;
 	position: relative;
 }
@@ -209,6 +212,9 @@ html, body {
 	.music-note-container {
 		left: 70%;
 	}
+	.search-container {
+		width: 500px;
+	}
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -219,15 +225,15 @@ html, body {
 	.load-bar {
 		width: 260px;
 	}
+	.search-container {
+		width: 500px;
+	}
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 	.music-note-container {
 		left: 58%;
-	}
-	.load-bar {
-		width: 260px;
 	}
 }
 
