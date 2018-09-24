@@ -1,9 +1,11 @@
-import requests
+import requests, json
 from bs4 import BeautifulSoup
 
+# Set up
 html = requests.get("http://www.community-music.info/groups.html").content
 soup = BeautifulSoup(html, 'html.parser')
 
+# Constants
 BAND_INFO_TABLE = 3
 FIRST_ROW = 1 
 
@@ -12,34 +14,62 @@ def getTables():
 	return soup.find_all('table')
 	
 # Get every <tr> in the given <table> element
-def getRows(tables):
-	rows = tables[BAND_INFO_TABLE].find_all('tr')
+def getRows(table):
+	return table.find_all('tr')
 
-# Get the band name cell from the passed in row
-def getBandName(row):
-	return None
+# Returns the first href found in a row
+def getHomePage(row):
+	for a in rows[FIRST_ROW].find_all('a', href=True):
+		return a['href']
 
-# Get the city cell from the passed in row
-def getCity(row):
-	return None
+# Gets the next HTML element.
+# No other function that takes in a row should
+# be called in a function that calls this function.
+def nextElement(row):
+	return row.next.next
 
-# Get the contact cell from the passed in row
-def getContact(row):
-	return None
+def getData(row):
+	bandName = nextElement(row)
+	row = nextElement(row)
+	print bandName
 
-# Get the state and country cell from the passed in contact cell
-def getStateAndCountry(cell):
-	return None
+	city = nextElement(row)
+	row = nextElement(row)
+	print city
 
-# Get homepage cell from the passed in contact cell
-def getHomePage(cell):
-	return None
+	stateAndCountry = nextElement(row)
+	row = nextElement(row)
+	arr = stateAndCountry.split(" ")
 
-# Columns/individual cells
-# cells = []
-# for row in range(FIRST_ROW, len(rows)):
-# 	cells.append(rows[row].find_all('td', limit=1))
+	state = ""
+	if(len(arr) == 1):
+		country = arr[0]
+	else:
+		state = arr[0]
+		country = arr[1]
+
+	print state
+	print country
+
+
+	contactName = nextElement(row)
+	row = nextElement(row)
+	print contactName
+
+
+	# email = nextElement(row)
+	# row = nextElement(row)
+	# print email
+
+
+
+
 
 tables = getTables()
-rows = getRows(tables)
-print rows[1]
+rows = getRows(tables[BAND_INFO_TABLE])
+
+
+getData(rows[13])
+print getHomePage(rows[FIRST_ROW])
+# print getBandName(rows[FIRST_ROW])
+
