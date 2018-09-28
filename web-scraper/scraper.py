@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, re
 from bs4 import BeautifulSoup
 
 # Set up
@@ -19,8 +19,9 @@ def getRows(table):
 
 # Returns the first href found in a row
 def getHomePage(row):
-	for a in rows[FIRST_ROW].find_all('a', href=True):
+	for a in row.find_all('a', href=True):
 		return a['href']
+
 
 # Gets the next HTML element.
 # No other function that takes in a row should
@@ -28,14 +29,19 @@ def getHomePage(row):
 def nextElement(row):
 	return row.next.next
 
-def getData(row):
+# Returns a JSON object that contains the
+# band name, city, state, country, and contact name
+def getTRData(row):
+	# This is the object that will be returned
+	data = {} 
+
 	bandName = nextElement(row)
 	row = nextElement(row)
-	print bandName
+	data['bandName'] = bandName
 
 	city = nextElement(row)
 	row = nextElement(row)
-	print city
+	data['city'] = city
 
 	stateAndCountry = nextElement(row)
 	row = nextElement(row)
@@ -45,31 +51,36 @@ def getData(row):
 	if(len(arr) == 1):
 		country = arr[0]
 	else:
-		state = arr[0]
-		country = arr[1]
-
-	print state
-	print country
-
+		# Special case for the ordering with USA
+		if(arr[1] == "USA"):
+			state = arr[0]
+			country = arr[1]
+		else:
+			state = arr[1]
+			country = arr[0]
+	data['state'] = state
+	data['country'] = country
 
 	contactName = nextElement(row)
 	row = nextElement(row)
-	print contactName
+	data['contactName'] = contactName
 
+	return data
 
-	# email = nextElement(row)
-	# row = nextElement(row)
-	# print email
+def getAllData(row):
+	data = getTRData(row)
+	data['homepage'] = getHomePage(row)
+	# data['email'] = getEmail()
+	return data
 
-
-
-
+def generateObjArr(rows):
+	data = []
+	for i in range(FIRST_ROW, len(rows)):
+		data.append(getAllData(rows[i]))
+	return data
 
 tables = getTables()
 rows = getRows(tables[BAND_INFO_TABLE])
+print generateObjArr(rows)
 
-
-getData(rows[13])
-print getHomePage(rows[FIRST_ROW])
-# print getBandName(rows[FIRST_ROW])
 
