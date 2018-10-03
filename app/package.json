@@ -1,0 +1,19 @@
+{
+  "name": "community-band-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpwilliams/community-band-finder.git"
+  },
+  "author": "Ryan P. Williams",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/rpwilliams/community-band-finder/issues"
+  },
+  "homepage": "https://github.com/rpwilliams/community-band-finder#readme"
+}
