@@ -6,3 +6,11 @@ describe('sum', function() {
 		});
 	});
 });
+
+describe('REST', function() {
+	describe('#GET', function() {
+		it('2 plus 2 should equal four', function() {
+			assert.equal(4, 2 + 4);
+		});
+	});
+});
