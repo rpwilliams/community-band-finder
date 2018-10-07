@@ -61,6 +61,12 @@ table {
 
 /* ========================= HTML TAGS ======================== */
 
+@font-face {
+	font-family: Fela;
+	src: url('../assets/fonts/Fela/Fela.otf');
+}
+
+
 * {
 	/*Allow padding to be included in total width/height */
 	box-sizing: border-box;
@@ -68,23 +74,27 @@ table {
 
 html, body {
 	overflow: hidden;
-	background-color: gray;
+	background-color: black;
 	height: 100%; /* Used for the full page background */
 	color: white;
 }
 
 body {
-	font-family: 'Roboto', 'Open Sans', sans-serif;
+	font-family: 'Roboto',  sans-serif;
 }
 
 h1 {
 	font-size: 24px;
 }
 
+h2 {
+	font-family: 'Fela';
+	font-size: 24px;
+}
 
 /* For Font Awesome icons */
 i {
-	color: #DC143C;
+	color: #FC3;
 	position: absolute;
 	padding: 5px;
 	font-size: 30px !important;
@@ -99,7 +109,7 @@ input {
 }
 input:focus {
 	outline: none !important;
-	border: 1px solid #DC143C;
+	border: 1px solid #FC3;
 }
 
 
@@ -204,6 +214,43 @@ input:focus {
 	opacity: 0.8;
 }
 
+.musician-left img {
+	width: 350px;
+	height: 350px;
+
+	/* Hide on mobile */
+	display: none;
+}
+
+.musician-right img {
+	width: 390px;
+	height: 390px;
+	
+	/* Hide on mobile */
+	display: none;
+}
+
+.left {
+	position: absolute;
+	left: -80%;
+	bottom: -175%;
+}
+
+.right {
+	position: absolute;
+	right: -85%;
+	bottom: -175%;
+}
+
+.logo {
+	position: fixed;
+	top: 0;
+	left: 0;
+	border: 0;
+	text-align: center;
+}
+
+
 .search-container {
 	width: 300px;
 	height: 40px;
@@ -227,6 +274,19 @@ input:focus {
 	color: #DC143C;
 }
 
+.black {
+	display: inline;
+	color: #000000;
+}
+
+.dark-yellow {
+	display: inline;
+	color: #FC3;
+}
+
+.white {
+	color: white;
+}
 
 
 /* ======================= MEDIA QUERIES ======================= */
@@ -239,6 +299,9 @@ input:focus {
 	}
 	.loading-screen-container img {
 		max-width: 300px;
+	}
+	.logo {
+		text-align: left;
 	}
 } 
 
@@ -263,12 +326,7 @@ input:focus {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 	i {
-		color: #DC143C;
-		position: absolute;
-
-		padding: 10px;
-		font-size: 30px !important;
-    
+		padding: 10px; 
 	}
 
 	.music-note-container {
@@ -276,6 +334,12 @@ input:focus {
 	}
 	.load-bar {
 		width: 260px;
+	}
+	.musician-left img {
+		display: block;
+	}
+	.musician-right img {
+		display: block;
 	}
 	.search-container {
 		width: 600px;

@@ -1,16 +1,13 @@
 var assert = require('assert');
-describe('sum', function() {
-	describe('#2plus2', function() {
-		it('2 plus 2 should equal four', function() {
-			assert.equal(4, 4);
-		});
-	});
-});
 
-describe('REST', function() {
+describe('API', function() {
 	describe('#GET', function() {
-		it('2 plus 2 should equal four', function() {
-			assert.equal(4, 4);
+		it('GET /search/<zipcode> does not return all bands with that zipcode', function() {
+			assert.equal(4, 4); // temporary placeholder
+		});
+
+		it('GET /search/<zipcode> returns a zipcode that does not match the given zipcode', function() {
+			assert.equal(4, 4); // temporary placeholder
 		});
 	});
 });
