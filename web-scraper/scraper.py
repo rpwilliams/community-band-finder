@@ -63,7 +63,43 @@ def getTRData(row):
 
 	contactName = nextElement(row)
 	row = nextElement(row)
-	data['contactName'] = contactName
+
+	# If there is no contact name, we are already on the 
+	# email, in which case this should be skipped
+	if(contactName.find("script") != -1):
+		data['contactName'] = ''
+	else:
+		data['contactName'] = contactName
+
+
+	# If there is an address (of arbritary number of lines),
+	# Search for the email
+	while(row != None):
+		emailScript = str(nextElement(row))
+
+		if(row != None):
+			row = nextElement(row)
+
+		if(emailScript.find("script") != -1):
+			break
+	#print emailScript
+
+	email = ""
+	if(emailScript.find("script") != -1):
+		regexName = re.compile(r'var n ="(.+?)"')
+		nameResult = regexName.findall(emailScript)[0]
+		if nameResult:
+			email += nameResult
+
+		email += "@"
+
+		regexDomain = re.compile(r'var d = "(.+?)"')
+		domainResult = regexDomain.findall(emailScript)[0]
+		if domainResult:
+			email += domainResult
+	
+	print email
+	
 
 	return data
 
@@ -81,6 +117,5 @@ def generateObjArr(rows):
 
 tables = getTables()
 rows = getRows(tables[BAND_INFO_TABLE])
-print generateObjArr(rows)
-
+obj = generateObjArr(rows)
 
