@@ -17,6 +17,49 @@ def getTables():
 def getRows(table):
 	return table.find_all('tr')
 
+# Of the rows remaining, find one with a <script> tag.
+def findJavaScriptString(row):
+	while(row != None):
+		emailScript = str(nextElement(row))
+		if(row != None):
+			row = nextElement(row)
+
+		# If we have found the script tag, stop searching
+		if(emailScript.find("script") != -1):
+			return emailScript
+	return "" # Not found
+
+def getEmailFromJavascriptString(emailScript):
+	email = ""
+	if(emailScript):
+		# Get the first half of the email (e.g. rpwilliams)
+		regexName = re.compile(r'var n ="(.+?)"')
+		nameResult = regexName.findall(emailScript)
+		if nameResult:
+			nameResult[0] = fixEmailNameTypos(nameResult[0])
+			email += nameResult[0]
+		# If nameResult was empty, the whole email will be empty
+		else:
+			return email
+
+		email += "@"
+
+		# Get the email domain (e.g. gmail.com)
+		regexDomain = re.compile(r'var d = "(.+?)"')
+		domainResult = regexDomain.findall(emailScript)
+		if domainResult:
+			email += domainResult[0]
+	
+	return email
+
+# Fix the emails that were entered with a : at the beginning
+# @param name: the blank in ____@email.com
+def fixEmailNameTypos(name):
+	if(name[0] == ':'):
+		return name.replace(":", "")
+	else:
+		return name # The name had no typos
+
 # Returns the first href found in a row
 def getHomePage(row):
 	for a in row.find_all('a', href=True):
@@ -71,35 +114,13 @@ def getTRData(row):
 	else:
 		data['contactName'] = contactName
 
-
-	# If there is an address (of arbritary number of lines),
-	# Search for the email
-	while(row != None):
-		emailScript = str(nextElement(row))
-
-		if(row != None):
-			row = nextElement(row)
-
-		if(emailScript.find("script") != -1):
-			break
-	#print emailScript
-
-	email = ""
-	if(emailScript.find("script") != -1):
-		regexName = re.compile(r'var n ="(.+?)"')
-		nameResult = regexName.findall(emailScript)[0]
-		if nameResult:
-			email += nameResult
-
-		email += "@"
-
-		regexDomain = re.compile(r'var d = "(.+?)"')
-		domainResult = regexDomain.findall(emailScript)[0]
-		if domainResult:
-			email += domainResult
+	# Ignore the address, and
+	# and find the script tag that contains the email
+	emailScript = findJavaScriptString(row)
+	# Get an email from the javascript string we found
+	email = getEmailFromJavascriptString(emailScript)
 	
-	print email
-	
+	data['email'] = email
 
 	return data
 
@@ -118,4 +139,3 @@ def generateObjArr(rows):
 tables = getTables()
 rows = getRows(tables[BAND_INFO_TABLE])
 obj = generateObjArr(rows)
-
