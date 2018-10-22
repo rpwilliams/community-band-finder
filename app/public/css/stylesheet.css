@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
+u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -69,6 +69,8 @@ table {
 
 * {
 	/*Allow padding to be included in total width/height */
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -81,6 +83,7 @@ html, body {
 
 body {
 	font-family: 'Roboto',  sans-serif;
+	margin-top: 50px; /* Push everything beneath the logo */
 }
 
 h1 {
@@ -92,6 +95,11 @@ h2 {
 	font-size: 24px;
 }
 
+h4 {
+	color: black;
+	font-size: 18px;
+}
+
 /* For Font Awesome icons */
 i {
 	color: #FC3;
@@ -99,6 +107,9 @@ i {
 	padding: 5px;
 	font-size: 30px !important;
     
+}
+span {
+	color: #FC3;
 }
 
 /* Shift placeholder to the right */
@@ -133,6 +144,7 @@ input:focus {
 	top: 50%;
 	left: 50%;
 	margin-right: -50%;
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
 
@@ -289,6 +301,84 @@ input:focus {
 }
 
 
+/* --- View Bands Page --- */
+.vertical-center {
+	position: absolute;
+	margin-top: 55%;
+	margin-left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.card-grid {
+	display: grid;
+
+	/* Create unknown amount of columns of length 200px.
+	    The minmax will delete any extra space  */
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-auto-rows: auto;
+	/* Change the size of grid-row-gap and grid-column-gap to 1rem */
+	grid-gap: 1rem;
+}
+
+.card {
+	/*box-shadow: 0 4px 8x 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	width: 100%;
+	height: 33.3%;
+	border: solid black;
+	background-color: white;
+	margin-bottom: 5px;
+	position: relative;*/
+	background-color: white;
+	border: 2px solid #e7e7e7;
+	border-radius: 4px;
+	padding: .5rem;
+	text-align: center;
+}
+
+.card-info {
+	position: relative;
+	display: block;
+	border: solid black;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.card-band-name {
+	display: block;
+	width: 100%;
+}
+
+.card-location {
+	display: block;
+}
+
+.card-conductor img {
+	width: 18px;
+	height: 18px;
+}
+
+
+.card-email img {
+	width: 18px;
+	height: 18px;
+}
+
+.card-instrument img {
+	margin: 30px auto;
+	width: 150px;
+	height: 150px;
+	display: block;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+
+
+
 /* ======================= MEDIA QUERIES ======================= */
 
 
@@ -347,6 +437,18 @@ input:focus {
 	}
 	.main-page-message {
 		width: 600px;
+	}
+
+	/* Card styles */	
+	.vertical-center {
+		margin: 0;
+		top: 50%;
+		margin-left: 5%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+	}
+	.card-grid {
+		grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 	}
 } 
 
