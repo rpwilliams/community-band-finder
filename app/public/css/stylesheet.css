@@ -75,7 +75,7 @@ table {
 }
 
 html, body {
-	overflow: hidden;
+	/*overflow: hidden;*/
 	background-color: black;
 	height: 100%; /* Used for the full page background */
 	color: white;
@@ -84,6 +84,10 @@ html, body {
 body {
 	font-family: 'Roboto',  sans-serif;
 	margin-top: 50px; /* Push everything beneath the logo */
+}
+
+a {
+	text-decoration: none;
 }
 
 h1 {
@@ -125,6 +129,25 @@ input:focus {
 
 
 /* ======================= CLASSES ======================= */
+
+
+/* --- Footer --- */
+
+/* Wrapper, to make footer sticky */
+.wrapper {
+	min-height: 100%;
+
+	margin-bottom: -50px; /* This must be equal to height of footer */
+}
+
+.footer,
+.push {
+	height: 50px;
+}
+
+.footer {
+	background-color: #343434; /* Jet */
+}
 
 /* --- Loading Screen --- */
 
@@ -322,32 +345,21 @@ input:focus {
 }
 
 .card {
-	/*box-shadow: 0 4px 8x 0 rgba(0,0,0,0.2);
-	transition: 0.3s;
-	width: 100%;
-	height: 33.3%;
-	border: solid black;
-	background-color: white;
-	margin-bottom: 5px;
-	position: relative;*/
 	background-color: white;
 	border: 2px solid #e7e7e7;
 	border-radius: 4px;
 	padding: .5rem;
 	text-align: center;
+	cursor: pointer;
 }
 
-.card-info {
-	position: relative;
-	display: block;
-	border: solid black;
-	margin: 0 auto;
-	text-align: center;
+.card:hover {
+	opacity: 0.9;
 }
 
-.card-band-name {
-	display: block;
-	width: 100%;
+.card-band-name img {
+	width: 18px;
+	height: 18px;
 }
 
 .card-location {
@@ -358,7 +370,6 @@ input:focus {
 	width: 18px;
 	height: 18px;
 }
-
 
 .card-email img {
 	width: 18px;
