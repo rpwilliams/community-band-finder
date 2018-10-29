@@ -29,6 +29,9 @@ def findJavaScriptString(row):
 			return emailScript
 	return "" # Not found
 
+# Use regular expression to find an email from a script tag
+# Format is (example): <script>var n = "rpwilliams96" 
+# var d = "gmail.com"</script>
 def getEmailFromJavascriptString(emailScript):
 	email = ""
 	if(emailScript):

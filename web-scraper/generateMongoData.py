@@ -7,10 +7,11 @@ from pprint import pprint
 # Establish mongodb connection
 client = MongoClient('mongodb://pythonuser:mamallama77@ds123003.mlab.com:23003/community-band-finder')
 db = client['community-band-finder']
+collection = db['bands']
 db.authenticate('pythonuser', 'mamallama77')
 
 # Clear previous collection
-db.posts.drop()
+collection.drop()
 
 # Update with new collection
 length = len(obj)

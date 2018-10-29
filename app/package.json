@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/rpwilliams/community-band-finder/issues"
   },
-  "homepage": "https://github.com/rpwilliams/community-band-finder#readme"
+  "homepage": "https://github.com/rpwilliams/community-band-finder#readme",
+  "dependencies": {
+    "zipcodes": "^8.0.0"
+  }
 }
