@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html id="main-page">
+	<header>
+		<title> Community Band Finder: Find a community band or orchestra near you </title>
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+		<link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	</header>
+
+	<body>
+		<!-- <div class="bg"></div> -->
+		<div class="wrapper">
+			<div class="logo"> 
+				<h2> 
+					<div class="dark-yellow">Community Band Finder</div> <div class="white" style="font-size: 15px"> Beta</div> 
+				</h2> 
+			</div>
+			<div class="center">
+
+				<div class="musician-left left">
+					<img src="assets/images/main-screen/icons/saxophonist-playing-sax.svg" />
+				</div>
+				
+				<!-- Rotating Message -->
+				<div class="main-page-message">
+					<h1> Find a <div class="dark-yellow"><b>community band or orchestra</b></div> near you.</h1>
+				</div>
+				<!-- Search Bar -->
+				<div class="search-container">
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
+
+					<!-- Autocomplete with Places API -->
+					<!-- <div id="locationField"> -->
+						<input id="autocomplete" type="text" class="search-bar" placeholder="Enter an address, neighborhood, city or ZIP code">
+					<!-- </div>			 -->
+				</div>
+
+				<div class="musician-right right">
+					<img src="assets/images/main-screen/icons/male-playing-cello.svg" />
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+
+		<script>
+			/* 
+				Places API autocomplete functions.
+				Based on https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+			 */
+
+			 var autocomplete;
+
+			 function initAutocomplete() {
+			 	// Create the autocomplete object, restricting the search to
+			 	// geographical location types
+			 	autocomplete = new google.maps.places.Autocomplete(
+			 		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+			 		{types: ['geocode']});
+
+		 		// When the user selects an address from the dropdown,
+		 		// populate the address fields in the form
+		 		autocomplete.addListener('place_changed', sendLocation);
+			}
+
+			function sendLocation() {
+				console.log(autocomplete.getPlace());
+			}
+
+			// Bias the autocomplete object to the user's geographical location,
+			// as supplied by the browser's 'navigator.geolocation' object.
+			document.body.onload = function() {
+				if(navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var geolocation = {
+							lat: position.coords.latitude,
+							lng: position.coords.longitude
+						};
+						var circle = new google.maps.Circle({
+							center: geolocation,
+							radius: position.coords.accuracy
+						});
+						autocomplete.setBounds(circle.getBounds());
+					});
+				}
+			}
+		</script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW8mXxPKucPQvCb7YkNbjPuE28g2QTMVA&libraries=places&callback=initAutocomplete" async defer></script>
+	</body>
+
+	<footer class="footer">
+		Banana
+	</footer>
+</html>
