@@ -112,8 +112,14 @@ i {
 	font-size: 30px !important;
     
 }
+
 span {
 	color: #FC3;
+}
+
+form {
+  height: 100%;
+  width: 100%;
 }
 
 /* Shift placeholder to the right */
@@ -122,6 +128,7 @@ input {
     border: 1px solid black;
     font-size: 18px;
 }
+
 input:focus {
 	outline: none !important;
 	border: 1px solid #FC3;

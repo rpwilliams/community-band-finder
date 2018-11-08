@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 		<link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</header>
 
 	<body>
@@ -31,7 +32,9 @@
 
 					<!-- Autocomplete with Places API -->
 					<!-- <div id="locationField"> -->
-						<input id="autocomplete" type="text" class="search-bar" placeholder="Enter an address, neighborhood, city or ZIP code">
+						<!-- <form action="/search/" method="post" enctype="application/x-www-form-urlencoded"> -->
+							<input id="autocomplete" name="location" class="search-bar" placeholder="Enter an address, neighborhood, city or ZIP code">
+						<!-- </form> -->
 					<!-- </div>			 -->
 				</div>
 
@@ -57,13 +60,23 @@
 			 		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
 			 		{types: ['geocode']});
 
-		 		// When the user selects an address from the dropdown,
-		 		// populate the address fields in the form
-		 		autocomplete.addListener('place_changed', sendLocation);
-			}
+		 		// When the user selects an address from the dropdown
+		 		autocomplete.addListener('place_changed', function() {
+		 			var place = autocomplete.getPlace();
+					var lat = place.geometry.location.lat();
+					var long = place.geometry.location.lng();
 
-			function sendLocation() {
-				console.log(autocomplete.getPlace());
+					$.ajax({
+						type: 'POST',
+						url: '/search/10',
+						data: {lat: lat, long: long},
+						dataType: 'json',
+						success: function(data) {
+							// handle response here
+							console.log('Success!');
+						}
+					})
+		 		});
 			}
 
 			// Bias the autocomplete object to the user's geographical location,
