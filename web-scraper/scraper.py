@@ -1,13 +1,15 @@
-import requests, json, re
-from bs4 import BeautifulSoup
+import requests, json, re, requests, googlemaps
+from bs4 import BeautifulSoup 
 
-# Set up
+# Set up and global variables
 html = requests.get("http://www.community-music.info/groups.html").content
 soup = BeautifulSoup(html, 'html.parser')
+gmaps = googlemaps.Client(key='AIzaSyBHZZ4-XDgacEZE7FqcDRcmJzRBtSaEBMg')
 
 # Constants
 BAND_INFO_TABLE = 3
 FIRST_ROW = 1 
+
 
 # Get every <table> element
 def getTables():
@@ -54,6 +56,7 @@ def getEmailFromJavascriptString(emailScript):
 			email += domainResult[0]
 	
 	return email
+
 
 # Fix the emails that were entered with a : at the beginning
 # @param name: the blank in ____@email.com
@@ -121,9 +124,11 @@ def getTRData(row):
 	# and find the script tag that contains the email
 	emailScript = findJavaScriptString(row)
 	# Get an email from the javascript string we found
-	email = getEmailFromJavascriptString(emailScript)
-	
+	email = getEmailFromJavascriptString(emailScript)	
 	data['email'] = email
+
+	address = city + " " + state + " " + country
+	data = getCoordinates(address, data)
 
 	return data
 
@@ -137,6 +142,25 @@ def generateObjArr(rows):
 	data = []
 	for i in range(FIRST_ROW, len(rows)):
 		data.append(getAllData(rows[i]))
+	return data
+
+def getCoordinates(address, data):
+	geocode = gmaps.geocode(address)
+	
+	print 'Attempting to find geocode for {}...'.format(address)
+	if(len(geocode) > 0):
+		geocode = geocode[0] # Need this because the API returns a list containing a single element
+		location = geocode['geometry']['location']
+		lat = location['lat']
+		lng = location['lng']
+		data['lat'] = lat
+		data['lng'] = lng 
+		print 'Added geocode {},{} for address {}\n'.format(lat,lng,address)
+	else:
+		data['lat'] = ''
+		data['lng'] = '' 
+		print 'Unable to retrieve geocode for {}'.format(address)
+	
 	return data
 
 tables = getTables()
