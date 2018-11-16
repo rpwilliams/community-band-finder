@@ -33,7 +33,7 @@
 					<!-- Autocomplete with Places API -->
 					<!-- <div id="locationField"> -->
 						<!-- <form action="/search/" method="post" enctype="application/x-www-form-urlencoded"> -->
-							<input id="autocomplete" name="location" class="search-bar" placeholder="Enter an address, neighborhood, city or ZIP code">
+					<input id="autocomplete" name="location" class="search-bar" placeholder="Enter an address, neighborhood, city or ZIP code">
 						<!-- </form> -->
 					<!-- </div>			 -->
 				</div>
@@ -64,12 +64,12 @@
 		 		autocomplete.addListener('place_changed', function() {
 		 			var place = autocomplete.getPlace();
 					var lat = place.geometry.location.lat();
-					var long = place.geometry.location.lng();
+					var lng = place.geometry.location.lng();
 
 					$.ajax({
 						type: 'POST',
 						url: '/search/10',
-						data: {lat: lat, long: long},
+						data: {lat: lat, lng: lng},
 						dataType: 'json',
 						success: function(data) {
 							// handle response here

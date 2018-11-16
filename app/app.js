@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
-const band = require('./routes/band.route');
+const search = require('./routes/search.route');
 const index  = require('./routes/main-page.route')
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname + '/public'))); // Give location of static files
 
 /* Middleware Routes */
-app.use('/search/', band);
+app.use('/search/', search);
 app.use('/', index);
 
 let port = 8080;

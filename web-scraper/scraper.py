@@ -1,4 +1,4 @@
-import requests, json, re, requests, googlemaps
+import requests, json, re, googlemaps
 from bs4 import BeautifulSoup 
 
 # Set up and global variables
