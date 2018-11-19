@@ -19,6 +19,9 @@
   "homepage": "https://github.com/rpwilliams/community-band-finder#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.12",
     "zipcodes": "^8.0.0"
   }
 }

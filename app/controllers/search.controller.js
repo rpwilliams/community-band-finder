@@ -1,5 +1,10 @@
 const Band = require('../models/band.model');
 
+exports.get_search_results = function(req, res) {
+	console.log(req.params.query[0]);
+	res.render('/view-bands');
+}
+
 exports.search_within_radius = function(req, res) {
 	var req_radius = req.params.radius;	// Search radius, specified by user
 	var req_lat = req.body.lat;	// The latitude given by the location specified by user
@@ -7,21 +12,30 @@ exports.search_within_radius = function(req, res) {
 	console.log("Textbox Latitude: " + req_lat);
 	console.log("Textbox Longitude: " + req_lng);
 
+	var returned_bands = []
 	Band.find({}).exec(function(err, bands) {
 		if(err) throw err;
 		
-		for(var i = 0; i < bands.length; i++) {
+		for(let i = 0; i < bands.length; i++) {
 			var lat = bands[i]['lat'];
 			var lng = bands[i]['lng'];
 
 			if(haversineDistance(lat, lng, req_lat, req_lng, true) <= req_radius) {
-				console.log(bands[i]['city'] + bands[i]['state']);
+				// console.log(bands[i]['city'] + bands[i]['state']);
+				returned_bands.push(bands[i]);
 			}
 		}	
+
+		for(let i = 0; i < returned_bands.length; i++) {
+			console.log(returned_bands[i]);
+		}
 		console.log('Done');
+
+		var redirect_loc = '/' + req_radius + '/' + returned_bands;
+		res.redirect('/poop');
 	});
 
-
+	
 
 	/* Here is where, for each zipcode in the database:
 			1. DONE: Get its latitude and longitude 
@@ -31,7 +45,6 @@ exports.search_within_radius = function(req, res) {
 			3. If it is less than radius, append to a JSON object
 			4. When done searching, send the JSON object
 	 */
-	res.send(req.body);
 }
 
 /* Use the haversine formula to get the distance between 2 geographical coordinates
