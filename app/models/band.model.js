@@ -10,7 +10,7 @@ let BandSchema = new Schema({
 	lat: {type: Number, required: true},
 	lng: {type: Number, required: true},
 	email: {type: String, required: true},
-	homePage: {type: String, required: true}
+	homepage: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Band', BandSchema);

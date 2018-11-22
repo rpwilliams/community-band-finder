@@ -357,12 +357,12 @@ input:focus {
 	border-radius: 4px;
 	padding: .5rem;
 	text-align: center;
-	cursor: pointer;
+	/*cursor: pointer;*/
 }
 
-.card:hover {
+/*.card:hover {
 	opacity: 0.9;
-}
+}*/
 
 .card-band-name img {
 	width: 18px;

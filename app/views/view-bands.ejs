@@ -16,21 +16,30 @@
 				</h2> 
 			</div>
 		
-			<% returned_bands.forEach(function(band) { %>
+			
 			<div class="card-grid">
-				<a href= '<%= band.homepage %>'>
+					<% returned_bands.forEach(function(band) { %>
 					<div class="card">
 						<!-- Band Name -->
 						<div class="card-band-name">
+							<% if(band.homepage != null) { %>
+							<a href= "<%- band.homepage %>">
+							<% } %>
+
 							<h1 class="black"><b><%= band.bandName %></b></h1>
-							<!-- <img src="../public/assets/images/view-bands/visit.svg"></img> -->
+
+							<% if(band.homepage != null) { %>
+							<img src="/assets/images/view-bands/visit.svg"></img>
+							</a>
+							<% } %>
 						</div>
 
 						<!-- Location -->
 						<div class="card-location">
 							<span class="fa fa-map-marker" aria-hidden="true"></span>
-							<h4 class="black"><%= band.city %>, <% band.state %></h4>
-							<h4 class="black"><%= band.country %></h4>
+							<h4 class="black"><%= band.city %>, <%= band.state %>
+								<%= band.country %>
+							</h4>
 						</div>
 
 						<!-- Image -->
@@ -54,15 +63,16 @@
 							<h4 class="black"><%= band.email %></h4>
 						</div>
 					</div>	
-				</a>
-				<% }); %>
+			
+
+					<% }); %>
 
 			<!-- 'Push' footer to bottom -->
 			<div class="push"></div>
 		</div> <!-- End footer wrapper -->
 	</body>
 
-	<footer class="footer">
+	<!-- <footer class="footer">
 		Banana
-	</footer>
+	</footer> -->
 </html>
