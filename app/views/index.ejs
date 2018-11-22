@@ -2,13 +2,14 @@
 <html id="main-page">
 	<header>
 		<title> Community Band Finder: Find a community band or orchestra near you </title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-		<link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css"/>
+		<link rel="stylesheet" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</header>
 
 	<body>
+		
 		<!-- <div class="bg"></div> -->
 		<div class="wrapper">
 			<div class="logo"> 
@@ -45,12 +46,13 @@
 			<div class="push"></div>
 		</div>
 
+		<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=autocomplete_post_req&key=AIzaSyBHZZ4-XDgacEZE7FqcDRcmJzRBtSaEBMg" async defer></script>
+
 		<script>
 			/* 
 				Places API autocomplete functions.
 				Based on https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
 			 */
-
 			 var autocomplete;
 
 			 function initAutocomplete() {
@@ -59,10 +61,17 @@
 			 	autocomplete = new google.maps.places.Autocomplete(
 			 		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
 			 		{types: ['geocode']});
+			 }
+
+			 function autocomplete_post_req() {
+			 	initAutocomplete();
 
 		 		// When the user selects an address from the dropdown
 		 		autocomplete.addListener('place_changed', function() {
 		 			var place = autocomplete.getPlace();
+
+		 			console.log(place);
+
 					var lat = place.geometry.location.lat();
 					var lng = place.geometry.location.lng();
 
@@ -101,8 +110,6 @@
 				}
 			}
 		</script>
-
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHZZ4-XDgacEZE7FqcDRcmJzRBtSaEBMg&libraries=places&callback=initAutocomplete" async defer></script>
 	</body>
 
 	<footer class="footer">

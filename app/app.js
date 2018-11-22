@@ -3,10 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const search = require('./routes/search.route');
-const index  = require('./routes/main-page.route')
+const index  = require('./routes/main-page.route');
 const app = express();
-
-app.set('view engine', 'ejs');
 
 /* Set up MongoDB connection */
 let dev_db_url = 'mongodb://rpwilliams96:mamallama99@ds123003.mlab.com:23003/community-band-finder';
@@ -15,6 +13,9 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 /* Middleware */
 app.use(bodyParser.json());

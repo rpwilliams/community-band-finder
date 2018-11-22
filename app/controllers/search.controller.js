@@ -1,17 +1,17 @@
+/*  Constants */
 const Band = require('../models/band.model');
+
+/* Global Variables */
+var req_lat; // The latitude given by the location specified by user
+var req_lng; // The longitude given by the location specified by user
+var req_radius; // Search radius, specified by user
 
 exports.get_search_results = function(req, res) {
 	// console.log(req.params.query);
-	console.log('test');
-	res.render('view-bands');
-}
+	console.log('Made it to GET');
 
-exports.search_within_radius = function(req, res) {
-	var req_radius = req.params.radius;	// Search radius, specified by user
-	var req_lat = req.body.lat;	// The latitude given by the location specified by user
-	var req_lng = req.body.lng;	// The longitude given by the location specified by user
-	console.log("Textbox Latitude: " + req_lat);
-	console.log("Textbox Longitude: " + req_lng);
+	// var band = new Band(req.body);
+	// console.log(band);
 
 	var returned_bands = []
 	Band.find({}).exec(function(err, bands) {
@@ -30,12 +30,19 @@ exports.search_within_radius = function(req, res) {
 		for(let i = 0; i < returned_bands.length; i++) {
 			console.log(returned_bands[i]);
 		}
-		
-		
-		//var redirect_loc = '/search/' + req_radius + '/test';
-		// res.redirect(redirect_loc);
-		//res.render(view-bands);
+
+		res.render('view-bands', { returned_bands: returned_bands });
 	});
+	
+	
+}
+
+exports.search_within_radius = function(req, res) {
+	req_radius = req.params.radius;	
+	req_lat = req.body.lat;	
+	req_lng = req.body.lng;	
+	console.log("User Latitude: " + req_lat);
+	console.log("User Longitude: " + req_lng);
 	
 	res.sendStatus(200);
 	
@@ -43,7 +50,8 @@ exports.search_within_radius = function(req, res) {
 	/* Here is where, for each zipcode in the database:
 			1. DONE: Get its latitude and longitude 
 			    * (call a new get geocode function -> do this in python script)
-			    * https://stackoverflow.com/questions/5585957/get-latlng-from-zip-code-google-maps-api
+			    * https://stackoverflow.com/questions/5585957/
+			    *  get-latlng-from-zip-code-google-maps-api
 			2. DONE: Calculate the distance, and see if it is less than radius
 			3. If it is less than radius, append to a JSON object
 			4. When done searching, send the JSON object
@@ -75,64 +83,3 @@ function haversineDistance(lat1, lng1, lat2, lng2, isMiles) {
   	return d;
 }
 
-// exports.band_details = function(req, res) {
-	// function get
-	// function get_zipcodes_within_radius(zipcode, radius) {
-	// 	/* Get all the zipcodes within the provided search radius */
-	// 	return zipcodes.radius(zipcode, radius);
-
-	// 	// rad_zipcodes.forEach(function(zip) {
-	// 	// 	console.log(zip);
-	// 	// });/* Get all the zipcodes within the provided search radius */
-
-	// 	// res.send(rad_zipcodes);
-	// }
-	
-	// let zipcodes_within_radius = get_zipcodes_within_radius(req.params.zipcode, req.params.radius);
-	// var cities = [];
-	// zipcodes_within_radius.forEach(function(zipcode) {
-	// 	let location_data = zipcodes.lookup(zipcode);
-	// 	let city = location_data.city;
-	// 	let state = location_data.state;
-	// 	if(!cities.includes(city)) {
-	// 		cities.push(city);
-	// 	}
-	// });
-
-	/* Note for future self: making an array of object for the 
-		cities may work for adding states. Do this first! */
-
-	// bands = [];
-	// cities.forEach(function(city) {
-	// 	Band.find({city: city}, function(err, band) {
-	// 		if(err) return err;
-	// 		bands.push(band);
-	// 		console.log(band);
-	// 	});
-	// });
-	// res.send(JSON.stringify(bands[0]));
-	
-
-	//let bands = [];
-	//cities.forEach(function(city) {
-		// bands.push(Band.find(city));
-		/*bands.push(Band.find({city: city}, function(err, band) {
-			if(err) return err;
-			console.log(city);
-			return city;
-		}));*/
-	//});
-
-	// bands.forEach(function(band) {
-	// 	console.log(band);
-	// });
-	//console.log(bands[0].city);
-	// res.send(bands[0]);
-	// res.send(bands);
-	// Band.find(function(err, band) {
-	// 	if(err) return err;
-
-
-	// 	res.send(band);
-	// });
-// };

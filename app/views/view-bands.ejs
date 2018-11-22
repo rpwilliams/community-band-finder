@@ -2,8 +2,8 @@
 <html id="main-page">
 	<header>
 		<title> Community Band Finder: Find a community band or orchestra near you </title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-		<link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css"/>
+		<link rel="stylesheet" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	</header>
 
@@ -16,76 +16,46 @@
 				</h2> 
 			</div>
 		
+			<% returned_bands.forEach(function(band) { %>
 			<div class="card-grid">
-				<a href="https://www.google.com">
+				<a href= '<%= band.homepage %>'>
 					<div class="card">
 						<!-- Band Name -->
 						<div class="card-band-name">
-							<h1 class="black"><b>Alameda County Community Band</b></h1>
+							<h1 class="black"><b><%= band.bandName %></b></h1>
 							<!-- <img src="../public/assets/images/view-bands/visit.svg"></img> -->
 						</div>
 
 						<!-- Location -->
 						<div class="card-location">
 							<span class="fa fa-map-marker" aria-hidden="true"></span>
-							<h4 class="black"> Pleasanton, CA </h4>
+							<h4 class="black"><%= band.city %>, <% band.state %></h4>
+							<h4 class="black"><%= band.country %></h4>
 						</div>
 
 						<!-- Image -->
 						<div class="card-instrument">
-							<img src="../public/assets/images/main-screen/icons/saxophonist-playing-sax.svg"></img>
+							<img src="/assets/images/main-screen/icons/saxophonist-playing-sax.svg"></img>
 						</div>
 
 						<!-- Conductor -->
 						<div class="card-conductor">
 							<div class="inline-block">
-								<img src="../public/assets/images/view-bands/conductor.svg" />
+								<img src="/assets/images/view-bands/conductor.svg" />
 							</div>
-							<h4 class="black">Bill Snyder</h4>
+							<h4 class="black"><%= band.contactName %></h4>
 						</div>
 
 						<!-- Email -->
 						<div class="card-email">
 							<div class="inline-block">
-								<img src="../public/assets/images/view-bands/envelope.svg" />
+								<img src="/assets/images/view-bands/envelope.svg" />
 							</div>
-							<h4 class="black">bsnyder@ksu.edu</h4>
+							<h4 class="black"><%= band.email %></h4>
 						</div>
 					</div>	
 				</a>
-
-				<div class="card">
-					<!-- Band Name -->
-					<div class="card-band-name"><h1 class="black"><b>Alameda County Community Band</b></h1></div>
-
-					<!-- Location -->
-					<div class="card-location">
-						<span class="fa fa-map-marker" aria-hidden="true"></span>
-						<h4 class="black"> Pleasanton, CA </h4>
-					</div>
-
-					<!-- Image -->
-					<div class="card-instrument">
-						<img src="assets/images/main-screen/icons/musician-with-a-percussion-instrument.svg"></img>
-					</div>
-
-					<!-- Conductor -->
-					<div class="card-conductor">
-						<div class="inline-block">
-							<img src="assets/images/view-bands/conductor.svg" />
-						</div>
-						<h4 class="black">Bill Snyder</h4>
-					</div>
-
-					<!-- Email -->
-					<div class="card-email">
-						<div class="inline-block">
-							<img src="assets/images/view-bands/envelope.svg" />
-						</div>
-						<h4 class="black">bsnyder@ksu.edu</h4>
-					</div>
-				</div> <!-- End individual card -->
-			</div> <!-- End Card Grid -->
+				<% }); %>
 
 			<!-- 'Push' footer to bottom -->
 			<div class="push"></div>
