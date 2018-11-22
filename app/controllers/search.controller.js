@@ -7,7 +7,7 @@ var req_lng; // The longitude given by the location specified by user
 var req_radius; // Search radius, specified by user
 
 exports.get_search_results = function(req, res) {
-	console.log('Made it to GET');
+	console.log('Getting search results based on user coordinates...');
 
 	var returned_bands = []
 	Band.find({}).exec(function(err, bands) {
@@ -18,19 +18,12 @@ exports.get_search_results = function(req, res) {
 			var lng = bands[i]['lng'];
 
 			if(haversineDistance(lat, lng, req_lat, req_lng, true) <= req_radius) {
-				// console.log(bands[i]['city'] + bands[i]['state']);
 				returned_bands.push(bands[i]);
 			}
 		}	
 
-		for(let i = 0; i < returned_bands.length; i++) {
-			console.log(returned_bands[i]);
-		}
-
 		res.render('view-bands', { returned_bands: returned_bands });
 	});
-	
-	
 }
 
 exports.search_within_radius = function(req, res) {
@@ -41,17 +34,13 @@ exports.search_within_radius = function(req, res) {
 	console.log("User Longitude: " + req_lng);
 	
 	res.sendStatus(200);
-	
+}
 
-	/* Here is where, for each zipcode in the database:
-			1. DONE: Get its latitude and longitude 
-			    * (call a new get geocode function -> do this in python script)
-			    * https://stackoverflow.com/questions/5585957/
-			    *  get-latlng-from-zip-code-google-maps-api
-			2. DONE: Calculate the distance, and see if it is less than radius
-			3. If it is less than radius, append to a JSON object
-			4. When done searching, send the JSON object
-	 */
+/* For debugging purposes */
+function print(returned_bands) {
+	for(let i = 0; i < returned_bands.length; i++) {
+		console.log(returned_bands[i]);
+	}
 }
 
 /* Use the haversine formula to get the distance between 2 geographical coordinates

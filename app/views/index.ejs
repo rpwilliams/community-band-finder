@@ -74,7 +74,7 @@
 
 					var lat = place.geometry.location.lat();
 					var lng = place.geometry.location.lng();
-					var radius = 10;
+					var radius = 10; // TODO: make this dynamic
 					var coords = "@" + lat + "," + lng;
 					var searchUrl = '/search/' + radius + '/' + coords;
 
