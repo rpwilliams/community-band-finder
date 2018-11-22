@@ -1,8 +1,9 @@
 const Band = require('../models/band.model');
 
 exports.get_search_results = function(req, res) {
-	console.log(req.params.query[0]);
-	res.render('/view-bands');
+	// console.log(req.params.query);
+	console.log('test');
+	res.render('view-bands');
 }
 
 exports.search_within_radius = function(req, res) {
@@ -29,12 +30,14 @@ exports.search_within_radius = function(req, res) {
 		for(let i = 0; i < returned_bands.length; i++) {
 			console.log(returned_bands[i]);
 		}
-		console.log('Done');
-
-		var redirect_loc = '/' + req_radius + '/' + returned_bands;
-		res.redirect('/poop');
+		
+		
+		//var redirect_loc = '/search/' + req_radius + '/test';
+		// res.redirect(redirect_loc);
+		//res.render(view-bands);
 	});
-
+	
+	res.sendStatus(200);
 	
 
 	/* Here is where, for each zipcode in the database:

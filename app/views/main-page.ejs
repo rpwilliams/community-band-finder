@@ -70,12 +70,16 @@
 						type: 'POST',
 						url: '/search/10',
 						data: {lat: lat, lng: lng},
-						dataType: 'json',
-						success: function(data) {
+						success: function() {
 							// handle response here
 							console.log('Success!');
+							window.location.href = '/search/10'
+						},
+						error: function(err) {
+							console.log(err);
+							console.log('Failure :(');
 						}
-					})
+					});
 		 		});
 			}
 
