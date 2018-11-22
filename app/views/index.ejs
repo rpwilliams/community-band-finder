@@ -74,15 +74,18 @@
 
 					var lat = place.geometry.location.lat();
 					var lng = place.geometry.location.lng();
+					var radius = 10;
+					var coords = "@" + lat + "," + lng;
+					var searchUrl = '/search/' + radius + '/' + coords;
 
 					$.ajax({
 						type: 'POST',
-						url: '/search/10',
+						url: searchUrl,
 						data: {lat: lat, lng: lng},
 						success: function() {
 							// handle response here
 							console.log('Success!');
-							window.location.href = '/search/10'
+							window.location.href = searchUrl;
 						},
 						error: function(err) {
 							console.log(err);

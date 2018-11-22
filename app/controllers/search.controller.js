@@ -7,11 +7,7 @@ var req_lng; // The longitude given by the location specified by user
 var req_radius; // Search radius, specified by user
 
 exports.get_search_results = function(req, res) {
-	// console.log(req.params.query);
 	console.log('Made it to GET');
-
-	// var band = new Band(req.body);
-	// console.log(band);
 
 	var returned_bands = []
 	Band.find({}).exec(function(err, bands) {
