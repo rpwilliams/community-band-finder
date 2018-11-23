@@ -20,6 +20,7 @@
 		
 			
 			<div class="card-grid">
+					<% var count = 1; %>
 					<% returned_bands.forEach(function(band) { %>
 					<div class="card">
 						<!-- Band Name -->
@@ -46,7 +47,8 @@
 
 						<!-- Image -->
 						<div class="card-instrument">
-							<img src="/assets/images/main-screen/icons/premium/saxophonist.svg"></img>
+							<img id="i<%= count %>"></img>
+							<% count++; %>
 						</div>
 
 						<!-- Conductor -->
@@ -78,3 +80,64 @@
 		Banana
 	</footer> -->
 </html>
+
+<script>
+
+/* 13 possible icons to be displayed for each card */
+var icons = {
+	1: "/assets/images/main-screen/icons/premium/trumpet.svg",
+	2: "/assets/images/main-screen/icons/premium/drummer_2.svg",
+	3: "/assets/images/main-screen/icons/premium/flute_2.svg",
+	4: "/assets/images/main-screen/icons/premium/accordian.svg",
+	5: "/assets/images/main-screen/icons/premium/conductor_2.svg",
+	6: "/assets/images/main-screen/icons/premium/cello.svg",
+	7: "/assets/images/main-screen/icons/premium/saxophonist.svg",
+	8: "/assets/images/main-screen/icons/premium/drummer_2.svg",
+	9: "/assets/images/main-screen/icons/premium/drummer.svg",
+	10: "/assets/images/main-screen/icons/premium/flute.svg",
+	11: "/assets/images/main-screen/icons/premium/triangle.svg",
+	12: "/assets/images/main-screen/icons/premium/trombone.svg",
+	13: "/assets/images/main-screen/icons/premium/violin.svg",
+	14: "/assets/images/main-screen/icons/premium/drummer_3.svg"
+};
+var NUM_ICONS = 14;
+var num_bands = <%= returned_bands.length %>;
+
+/* Get a random icon from the icons object */
+function getRandomIcon() {
+	/* Random number between 1 and 15 */
+	var min = 1;
+	var max = NUM_ICONS;
+	var randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+	return icons[randomNum];
+}
+
+/* Get a number between 1 and the number of icons. If the number
+   passed in is equal to the number of icons, reset. */
+function getNotRandomNumber(count) {
+	if(count >= NUM_ICONS) {
+		return 1;
+	}
+	return count + 1;
+}
+
+/* Get an icon based on the number given */
+function getIcon(count) {
+	return icons[count];
+}
+
+/* Give each card a random icon */
+function populateCardIcons() {
+	var icon_num = 0;
+	for(var elem = 1; elem <= num_bands; elem++) {
+		var id = "i" + elem;
+		// var icon = getRandomIcon();
+		icon_num = getNotRandomNumber(icon_num);
+		var icon = getIcon(icon_num);
+		document.getElementById(id).src = icon; 
+	}
+}
+populateCardIcons();
+
+
+</script>
