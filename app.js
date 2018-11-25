@@ -28,6 +28,6 @@ app.use('/', index);
 
 let port = 8080;
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
 	console.log('Server is up and running on port ' + port);
 });
