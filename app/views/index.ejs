@@ -46,6 +46,8 @@
 			<div class="push"></div>
 		</div>
 
+
+
 		<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=autocomplete_post_req&key=AIzaSyBHZZ4-XDgacEZE7FqcDRcmJzRBtSaEBMg" async defer></script>
 
 		<script>
@@ -74,7 +76,7 @@
 
 					var lat = place.geometry.location.lat();
 					var lng = place.geometry.location.lng();
-					var radius = 50; // TODO: make this dynamic
+					var radius = 25; // TODO: make this dynamic
 					var coords = "@" + lat + "," + lng;
 					var searchUrl = '/search/' + radius + '/' + coords;
 
@@ -113,9 +115,29 @@
 				}
 			}
 		</script>
+
+	
+	<!-- Footer -->
+	<footer class="footer-distributed">
+
+		<div class="footer-right">
+
+			<a href="https://www.linkedin.com/in/rpwilliams96/"><i class="fa fa-linkedin"></i></a>
+
+			<a href="https://www.github.com/rpwilliams"><i class="fa fa-github"></i></a>
+
+		</div>
+
+		<div class="footer-left">
+			<p>&copy; 2018 Ryan Williams. All rights reserved.</p>
+			<p>Developed by <a class="footer-links" href="http://www.RyanPaulWilliams.com">Ryan Williams.</a></p>
+		</div>
+
+	</footer>
 	</body>
 
-	<footer class="footer">
-		Banana
-	</footer>
+
+	
+
+	
 </html>

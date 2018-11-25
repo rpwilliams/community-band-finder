@@ -77,13 +77,15 @@ table {
 html, body {
 	/*overflow: hidden;*/
 	background-color: black;
-	height: 100%; /* Used for the full page background */
+	/*height: 100%;   Used for the full page background */
 	color: white;
+	overflow-x: hidden;
 }
 
 body {
 	font-family: 'Roboto',  sans-serif;
 	margin-top: 50px; /* Push everything beneath the logo */
+	/*position: relative;*/
 }
 
 a {
@@ -94,9 +96,10 @@ h1 {
 	font-size: 24px;
 }
 
+/* Logo */
 h2 {
 	font-family: 'Fela';
-	font-size: 24px;
+	font-size: 20px;
 }
 
 h4 {
@@ -105,7 +108,7 @@ h4 {
 }
 
 /* For Font Awesome icons */
-i {
+.search-container i {
 	color: #FC3;
 	position: absolute;
 	padding: 5px;
@@ -142,19 +145,81 @@ input:focus {
 
 /* Wrapper, to make footer sticky */
 .wrapper {
-	min-height: 100%;
+	min-height: 100vh;
+	
+	margin-bottom: -50px;
 
-	margin-bottom: -50px; /* This must be equal to height of footer */
 }
 
-.footer,
-.push {
+.push,
+.footer-distributed {
 	height: 50px;
 }
 
-.footer {
+
+.footer-distributed{
 	background-color: #343434; /* Jet */
+	width: 100%;
+    bottom: 0px;
 }
+
+.footer-distrubted {
+	background-color: #343434;;
+}
+
+.footer-distributed .footer-left p{
+	color:  #8f9296;
+	font-size: 14px;
+	padding-top: 5px;
+	margin: 0;
+}
+
+.footer-distributed .footer-left a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color: inherit;
+}
+
+.footer-distrubted .footer-left a:hover {
+	color: #fff !important;
+}
+
+.footer-distributed .footer-right{
+	float: right;
+	max-width: 180px;
+}
+
+.footer-distributed .footer-right a {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	/*background-color: #343434;*/
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-left: 3px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-right{
+		text-align: center;
+	}
+
+	.footer-distributed .footer-right{
+		display: none;
+	}
+}
+
+
 
 /* --- Loading Screen --- */
 
@@ -290,6 +355,9 @@ input:focus {
 	left: 0;
 	border: 0;
 	text-align: center;
+	background-color: #000;
+	width: 100%;
+	padding: 5px;
 }
 
 
@@ -402,6 +470,13 @@ input:focus {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+	.musician-left img {
+		display: none;
+	}
+	.musician-right img {
+		display: none;
+	}
+
 
 	.music-note-container {
 		left: 75%;
@@ -420,6 +495,10 @@ input:focus {
 		font-size: 22px;
 	}
 
+	h2 {
+		font-size: 24px;
+	}
+
 	.music-note-container {
 		left: 70%;
 	}
@@ -428,13 +507,38 @@ input:focus {
 	}
 	.main-page-message {
 		width: 500px;
-		height: 50px;
+		height: 32px;
+	}
+
+	.musician-left img {
+		width: 175px;
+		height: 175px;
+		display: none;
+	}
+	.musician-right img {
+		width: 175px;
+		height: 175px;
+		display: none;
+	}
+
+	.right {
+		position: absolute;
+		right: -35%;
+		bottom: -60%;
+	}
+	.left {
+		position: absolute;
+		left: -35%;
+		bottom: -60%;
+	}
+	.logo {
+		padding: 5px 0;
 	}
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-	i {
+	.search-container i {
 		padding: 10px; 
 	}
 
@@ -445,9 +549,13 @@ input:focus {
 		width: 260px;
 	}
 	.musician-left img {
+		width: 225px;
+		height: 225px;
 		display: block;
 	}
 	.musician-right img {
+		width: 250px;
+		height: 250px;
 		display: block;
 	}
 	.search-container {
@@ -457,6 +565,19 @@ input:focus {
 	.main-page-message {
 		width: 600px;
 	}
+
+	.right {
+		position: absolute;
+		right: -45%;
+		bottom: -80%;
+	}
+
+	.left {
+		position: absolute;
+		left: -45%;
+		bottom: -80%;
+	}
+
 
 	/* Card styles */	
 	.vertical-center {
