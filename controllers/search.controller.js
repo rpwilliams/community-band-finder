@@ -19,7 +19,7 @@ exports.get_search_results = function(req, res) {
 
 			var distance = haversineDistance(lat, lng, req_lat, req_lng, true);
 			if(distance <= req_radius) {
-				bands[i].distance = distance;
+				bands[i].distance = Math.round(distance, 2);
 				returned_bands.push(bands[i]);
 			}
 		}	
@@ -63,7 +63,7 @@ function haversineDistance(lat1, lng1, lat2, lng2, isMiles) {
 		return x * Math.PI/180;
 	}
 
-	var R = 6371; // Radius of earth, in km
+	var R = 6371; // Radius of earth, in km. Hopefully this never changes.
 	var x1 = lat2 - lat1;
 	var dLat = toRad(x1);
 	var x2 = lng2 - lng1;
