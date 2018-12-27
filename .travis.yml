@@ -7,5 +7,4 @@ cache:
 before_script: 
   - npm install -g mocha
 script:
-  - cd app
   - npm test
