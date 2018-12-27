@@ -50,9 +50,6 @@ function print(returned_bands) {
 	}
 }
 
-function sortByDistance(returned_bands) {
-	newArr = [];
-}
 
 /* Use the haversine formula to get the distance between 2 geographical coordinates
    Courtesy of Nathan Lippi's answer on

@@ -227,11 +227,10 @@ input:focus {
 
 }
 
-/* The image for the instrument */
-.loading-screen-container img {
-	max-height: 100%;
-	max-width: 200px;
-	/*max-width: 300px;*/
+/* The autoplaying video */
+.loading-screen-container video {
+	width: 480px;
+	height: 360px;
 }
 
 .center {
