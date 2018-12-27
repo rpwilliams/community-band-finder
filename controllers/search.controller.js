@@ -17,13 +17,20 @@ exports.get_search_results = function(req, res) {
 			var lat = bands[i]['lat'];
 			var lng = bands[i]['lng'];
 
-			if(haversineDistance(lat, lng, req_lat, req_lng, true) <= req_radius) {
+			var distance = haversineDistance(lat, lng, req_lat, req_lng, true);
+			if(distance <= req_radius) {
+				bands[i].distance = distance;
 				returned_bands.push(bands[i]);
 			}
 		}	
 
+		returned_bands.sort(sortCriteria);
 		res.render('view-bands', { returned_bands: returned_bands });
 	});
+}
+
+function sortCriteria(a, b) {
+	return parseFloat(a.distance) - parseFloat(b.distance);
 }
 
 exports.search_within_radius = function(req, res) {
@@ -41,6 +48,10 @@ function print(returned_bands) {
 	for(let i = 0; i < returned_bands.length; i++) {
 		console.log(returned_bands[i]);
 	}
+}
+
+function sortByDistance(returned_bands) {
+	newArr = [];
 }
 
 /* Use the haversine formula to get the distance between 2 geographical coordinates
