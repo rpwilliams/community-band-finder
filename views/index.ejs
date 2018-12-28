@@ -9,7 +9,15 @@
 	</header>
 
 	<body>
-		
+		<!-- Loading Screen -->
+		<div id="loading-screen-container">
+			<div class="center">
+				<video autoplay loop muted>
+					<source src="/assets/videos/Stick_Figure_Musicians/violinist.mp4" type="video/mp4">
+				</video>
+			</div>
+		</div>
+
 		<!-- <div class="bg"></div> -->
 		<div class="wrapper">
 			<div class="logo"> 
@@ -65,6 +73,15 @@
 			 		{types: ['geocode']});
 			 }
 
+			 // $(document).ready(function(){
+				// 		$(document).ajaxStart(function() {
+				// 			console.log('starting AJAX');
+				// 			$('#loading-screen-container').show();
+				// 		}).ajaxStop(function() {
+				// 			$('#loading-screen-container').hide();
+				// 		});
+				// 	});
+
 			 function autocomplete_post_req() {
 			 	initAutocomplete();
 
@@ -80,6 +97,8 @@
 					var coords = "@" + lat + "," + lng;
 					var searchUrl = '/search/' + radius + '/' + coords;
 
+
+					$('#loading-screen-container').show();
 					$.ajax({
 						type: 'POST',
 						url: searchUrl,
@@ -114,6 +133,8 @@
 					});
 				}
 			}
+
+			
 		</script>
 
 	
