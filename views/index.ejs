@@ -2,6 +2,7 @@
 <html id="main-page">
 	<header>
 		<title> Community Band Finder: Find a community band or orchestra near you </title>
+		<link rel="icon" href="assets/images/main-screen/icons/premium/saxophonist.svg">
 		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css"/>
 		<link rel="stylesheet" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -18,7 +19,6 @@
 			</div>
 		</div>
 
-		<!-- <div class="bg"></div> -->
 		<div class="wrapper">
 			<div class="logo"> 
 				<h2> 
@@ -27,6 +27,7 @@
 			</div>
 			<div class="center">
 
+				<!-- Left musician image -->
 				<div class="musician-left left">
 					<img src="assets/images/main-screen/icons/premium/saxophonist.svg" />
 				</div>
@@ -38,24 +39,20 @@
 				<!-- Search Bar -->
 				<div class="search-container">
 					<i class="fa fa-map-marker" aria-hidden="true"></i>
-
-					<!-- Autocomplete with Places API -->
-					<!-- <div id="locationField"> -->
-						<!-- <form action="/search/" method="post" enctype="application/x-www-form-urlencoded"> -->
+					<!-- Autocomplete input with Places API -->
 					<input id="autocomplete" name="location" class="search-bar" placeholder="Enter an address, neighborhood, city or ZIP code">
-						<!-- </form> -->
-					<!-- </div>			 -->
 				</div>
 
+				<!-- Right musician image -->
 				<div class="musician-right right">
 					<img src="assets/images/main-screen/icons/premium/cello.svg" />
 				</div>
 			</div>
+			<!-- Push content to the bottom (for the footer) -->
 			<div class="push"></div>
 		</div>
 
-
-
+		<!-- Google Places API -->
 		<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=autocomplete_post_req&key=AIzaSyBHZZ4-XDgacEZE7FqcDRcmJzRBtSaEBMg" async defer></script>
 
 		<script>
@@ -73,15 +70,6 @@
 			 		{types: ['geocode']});
 			 }
 
-			 // $(document).ready(function(){
-				// 		$(document).ajaxStart(function() {
-				// 			console.log('starting AJAX');
-				// 			$('#loading-screen-container').show();
-				// 		}).ajaxStop(function() {
-				// 			$('#loading-screen-container').hide();
-				// 		});
-				// 	});
-
 			 function autocomplete_post_req() {
 			 	initAutocomplete();
 
@@ -97,8 +85,9 @@
 					var coords = "@" + lat + "," + lng;
 					var searchUrl = '/search/' + radius + '/' + coords;
 
-
+					// Show the loading screen
 					$('#loading-screen-container').show();
+
 					$.ajax({
 						type: 'POST',
 						url: searchUrl,
@@ -133,32 +122,21 @@
 					});
 				}
 			}
-
-			
 		</script>
 
-	
-	<!-- Footer -->
-	<footer class="footer-distributed">
+		<!-- Footer -->
+		<footer class="footer-distributed">
 
-		<div class="footer-right">
+			<div class="footer-right">
+				<a href="https://www.linkedin.com/in/rpwilliams96/"><i class="fa fa-linkedin"></i></a>
 
-			<a href="https://www.linkedin.com/in/rpwilliams96/"><i class="fa fa-linkedin"></i></a>
+				<a href="https://www.github.com/rpwilliams"><i class="fa fa-github"></i></a>
+			</div>
 
-			<a href="https://www.github.com/rpwilliams"><i class="fa fa-github"></i></a>
-
-		</div>
-
-		<div class="footer-left">
-			<p>&copy; 2018 Ryan Williams. All rights reserved.</p>
-			<p>Developed by <a class="footer-links" href="http://www.RyanPaulWilliams.com">Ryan Williams.</a></p>
-		</div>
-
-	</footer>
+			<div class="footer-left">
+				<p>&copy; 2018 Ryan Williams. All rights reserved.</p>
+				<p>Developed by <a class="footer-links" href="http://www.RyanPaulWilliams.com">Ryan Williams.</a></p>
+			</div>
+		</footer>
 	</body>
-
-
-	
-
-	
 </html>

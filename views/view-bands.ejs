@@ -8,81 +8,67 @@
 	</header>
 
 	<body>
-		<div>
-			<!-- <div class="bg"></div> -->
-			<div class="logo"> 
-				<h2> 
-					<a href='/'>
-						<div class="dark-yellow">Community Band Finder</div> <div class="white" style="font-size: 15px"> Beta</div> 
-					</a>
-				</h2> 
-			</div>
+		<div class="logo"> 
+			<h2> 
+				<a href='/'>
+					<div class="dark-yellow">Community Band Finder</div> <div class="white" style="font-size: 15px"> Beta</div> 
+				</a>
+			</h2> 
+		</div>
 		
-			
-			<div class="card-grid">
-					<% var count = 1; %>
-					<% returned_bands.forEach(function(band) { %>
-					<div class="card">
-						<!-- Band Name -->
-						<div class="card-band-name">
-							<% if(band.homepage != null) { %>
-							<a href= "<%- band.homepage %>">
-							<% } %>
+		<div class="card-grid">
+			<% if(returned_bands.length == 0) { %>
+			<div class="card">
+				<h1 class="black"> No bands found within a 25 mile radius of the given location. Try <a href='/' style="color: #FC3; text-decoration: underline;">another location.</a> </h1>
+			</div>
+			<% } %>
 
-							<h1 class="black"><b><%= band.bandName %></b></h1>
+			<% var count = 1; %>
+			<% returned_bands.forEach(function(band) { %>
+			<div class="card">
+				<!-- Band Name -->
+				<div class="card-band-name">
+					<h1 class="black"><b><%= band.bandName %></b></h1>
+				</div>
 
-							<% if(band.homepage != null) { %>
-							<img src="/assets/images/view-bands/premium/visit.svg"></img>
-							</a>
-							<% } %>
-						</div>
+				<!-- Location -->
+				<div class="card-location">
+					<span class="fa fa-map-marker" aria-hidden="true"></span>
+					<h4 class="black"><%= band.city %>, <%= band.state %>
+						<%= band.country %> (~<%= band.distance %> miles) 
+					</h4>
+				</div>
 
-						<!-- Location -->
-						<div class="card-location">
-							<span class="fa fa-map-marker" aria-hidden="true"></span>
-							<h4 class="black"><%= band.city %>, <%= band.state %>
-								<%= band.country %> (~<%= band.distance %> miles) 
-							</h4>
-						</div>
+				<!-- Image -->
+				<div class="card-instrument">
+					<img id="i<%= count %>"></img>
+					<% count++; %>
+				</div>
 
-						<!-- Image -->
-						<div class="card-instrument">
-							<img id="i<%= count %>"></img>
-							<% count++; %>
-						</div>
+				<!-- Conductor -->
+				<div class="card-conductor">
+					<div class="inline-block">
+						<img src="/assets/images/view-bands/premium/conductor.svg" />
+					</div>
+					<h4 class="black"><%= band.contactName %></h4>
+				</div>
 
-						<!-- Conductor -->
-						<div class="card-conductor">
-							<div class="inline-block">
-								<img src="/assets/images/view-bands/premium/conductor.svg" />
-							</div>
-							<h4 class="black"><%= band.contactName %></h4>
-						</div>
-
-						<!-- Email -->
-						<div class="card-email">
-							<div class="inline-block">
-								<img src="/assets/images/view-bands/premium/envelope.svg" />
-							</div>
-							<h4 class="black"><%= band.email %></h4>
-						</div>
-					</div>	
-			
-
-					<% }); %>
-
-
-		</div> <!-- End footer wrapper -->
+				<!-- Email -->
+				<div class="card-email">
+					<div class="inline-block">
+						<img src="/assets/images/view-bands/premium/envelope.svg" />
+					</div>
+					<h4 class="black"><%= band.email %></h4>
+				</div>
+			</div>	<!-- End card -->
+			<% }); %>
+		</div> <!-- End grid -->
 	</body>
-
-	<!-- <footer class="footer">
-		Banana
-	</footer> -->
 </html>
 
 <script>
 
-/* 13 possible icons to be displayed for each card */
+/* 14 possible icons to be displayed for each card */
 var icons = {
 	1: "/assets/images/main-screen/icons/premium/trumpet.svg",
 	2: "/assets/images/main-screen/icons/premium/drummer_2.svg",
@@ -104,7 +90,7 @@ var num_bands = <%= returned_bands.length %>;
 
 /* Get a random icon from the icons object */
 function getRandomIcon() {
-	/* Random number between 1 and 15 */
+	/* Random number between 1 and NUM_ICONS */
 	var min = 1;
 	var max = NUM_ICONS;
 	var randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
