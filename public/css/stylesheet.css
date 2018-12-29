@@ -126,7 +126,7 @@ form {
 input {
     text-indent: 30px;
     border: 1px solid black;
-    font-size: 18px;
+    font-size: 12px;
 }
 
 input:focus {
@@ -485,6 +485,10 @@ input:focus {
 
 	h2 {
 		font-size: 24px;
+	}
+
+	input {
+		font-size: 18px;
 	}
 
 	.music-note-container {
