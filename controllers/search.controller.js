@@ -5,11 +5,12 @@ const Band = require('../models/band.model');
 var req_lat; // The latitude given by the location specified by user
 var req_lng; // The longitude given by the location specified by user
 var req_radius; // Search radius, specified by user
+var returned_bands;
 
 exports.get_search_results = function(req, res) {
 	console.log('Getting search results based on user coordinates...');
 
-	var returned_bands = []
+	returned_bands = []
 	Band.find({}).exec(function(err, bands) {
 		if(err) throw err;
 		
@@ -17,19 +18,19 @@ exports.get_search_results = function(req, res) {
 			var lat = bands[i]['lat'];
 			var lng = bands[i]['lng'];
 
-			var distance = haversineDistance(lat, lng, req_lat, req_lng, true);
+			var distance = exports.haversineDistance(lat, lng, req_lat, req_lng, true);
 			if(distance <= req_radius) {
-				bands[i].distance = Math.round(distance, 2);
+				bands[i].distance = distance;
 				returned_bands.push(bands[i]);
 			}
 		}	
 
-		returned_bands.sort(sortCriteria);
+		returned_bands.sort(exports.sortCriteria);
 		res.render('view-bands', { returned_bands: returned_bands });
 	});
 }
 
-function sortCriteria(a, b) {
+exports.sortCriteria = function(a, b) {
 	return parseFloat(a.distance) - parseFloat(b.distance);
 }
 
@@ -55,7 +56,7 @@ function print(returned_bands) {
    Courtesy of Nathan Lippi's answer on
    https://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript
  */
-function haversineDistance(lat1, lng1, lat2, lng2, isMiles) {
+exports.haversineDistance = function(lat1, lng1, lat2, lng2, isMiles) {
 	function toRad(x) {
 		return x * Math.PI/180;
 	}
@@ -75,4 +76,6 @@ function haversineDistance(lat1, lng1, lat2, lng2, isMiles) {
 
   	return d;
 }
+
+
 
