@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 # Set up and global variables
 html = requests.get("http://www.community-music.info/groups.html").content
 soup = BeautifulSoup(html, 'html.parser')
-gmaps = googlemaps.Client(key='AIzaSyBHZZ4-XDgacEZE7FqcDRcmJzRBtSaEBMg')
+gmaps = googlemaps.Client(key='AIzaSyBW8mXxPKucPQvCb7YkNbjPuE28g2QTMVA')
 
 # Constants
 BAND_INFO_TABLE = 3
