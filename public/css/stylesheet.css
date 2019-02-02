@@ -148,31 +148,30 @@ input:focus {
 
 .push,
 .footer-distributed {
-	height: 50px;
+	height: 90px;
 }
 
 .footer-distributed{
 	background-color: #343434; /* Jet */
 	width: 100%;
     bottom: 0px;
+    padding: 20px 10px;
 }
 
-.footer-distrubted {
-	background-color: #343434; /* Jet */
-}
 
 .footer-distributed .footer-left p{
 	color:  #8f9296;
 	font-size: 14px;
-	padding-top: 5px;
+	/*padding-top: 5px;*/
 	margin: 0;
 }
 
 .footer-distributed .footer-left a{
 	display:inline-block;
-	line-height: 1.8;
-	text-decoration: none;
-	color: inherit;
+	line-height: 1.5;
+	text-decoration: underline;
+	/*color: inherit;*/
+	color: #FC3;
 }
 
 .footer-distrubted .footer-left a:hover {
@@ -181,7 +180,14 @@ input:focus {
 
 .footer-distributed .footer-right{
 	float: right;
-	max-width: 180px;
+	max-width: 300px;
+}
+
+.footer-distributed .footer-right p {
+	color:  #8f9296;
+	font-size: 14px;
+	padding-top: 5px;
+	margin: 0;
 }
 
 .footer-distributed .footer-right a {
