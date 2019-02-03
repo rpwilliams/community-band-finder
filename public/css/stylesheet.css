@@ -88,6 +88,9 @@ body {
 a {
 	text-decoration: none;
 }
+a:visited {
+	color: black;
+}
 
 h1 {
 	font-size: 24px;
@@ -491,6 +494,40 @@ input:focus {
 	text-align: center;
 }
 
+/* Update Page */
+
+.card-update {
+	background-color: white;
+	border: 2px solid #e7e7e7;
+	border-radius: 4px;
+	padding: .5rem;
+	height: 100%;
+	color: black;
+	width: 25%;
+	margin: 10px auto; /* Center */
+	overflow: auto;
+}
+
+.card-update a {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.card-update img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px;
+	height: 150px;
+	padding: 10px;
+	text-align: center;
+}
+
+.card-about h2 {
+	text-align: center;
+}
+
+
 /*.row {
 	width: 100%;
 	border: 2px solid black;
@@ -596,6 +633,14 @@ input:focus {
 		float: left;
 	}
 	.card-about h2 {
+		text-align: left;
+	}
+
+	.card-update img {
+		display: static;
+		float: left;
+	}
+	.card-update h2 {
 		text-align: left;
 	}
 } 
