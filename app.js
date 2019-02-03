@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const disclaimer = require('./routes/disclaimer.route');
 const about = require('./routes/about.route');
 const search = require('./routes/search.route');
 const index  = require('./routes/main-page.route');
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname + '/public'))); // Give location of static files
 
 /* Middleware Routes */
+app.use('/disclaimer', disclaimer);
 app.use('/about', about);
 app.use('/', index);
 app.use('/search/', search);

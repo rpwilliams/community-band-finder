@@ -15,7 +15,7 @@
 */
 
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+h1, h2, h3, h4, h5, h6, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -458,6 +458,64 @@ input:focus {
 	display: inline-block;
 }
 
+/* About Page */
+
+.card-about {
+	background-color: white;
+	border: 2px solid #e7e7e7;
+	border-radius: 4px;
+	padding: .5rem;
+	height: 100%;
+	color: black;
+	width: 75%;
+	margin: 10px auto; /* Center */
+	overflow: auto;
+}
+
+.card-about a {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.card-about img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px;
+	height: 150px;
+	padding: 10px;
+	text-align: center;
+}
+
+.card-about h2 {
+	text-align: center;
+}
+
+/*.row {
+	width: 100%;
+	border: 2px solid black;
+	height: 25vh;
+	margin: 1px;
+}*/
+
+/*.row .imgcontainer {
+	overflow: hidden;
+	float:right;
+}
+*/
+/*.row .imgcontainer img {
+	border: 2px solid red;
+	
+}*/
+
+/*.row .textcontainer {
+	float: left;
+	border: 2px solid blue;
+	height: 100%;
+	width: 50%;
+	overflow: hidden;
+}
+*/
 
 /* ======================= MEDIA QUERIES ======================= */
 
@@ -531,6 +589,14 @@ input:focus {
 	}
 	.logo {
 		padding: 5px 0;
+	}
+
+	.card-about img {
+		display: static;
+		float: left;
+	}
+	.card-about h2 {
+		text-align: left;
 	}
 } 
 
