@@ -22,6 +22,10 @@ npm
 
 `npm start` 
 
+## Testing
+
+`npm test` 
+
 ## Author
 
 * **Ryan Williams** - [rpwilliams](https://github.com/rpwilliams)
