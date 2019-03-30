@@ -3,12 +3,14 @@ from scraper import obj
 from pymongo import MongoClient
 # Make output look pretty
 from pprint import pprint
+import os # for env variables
 
 # Establish mongodb connection
-client = MongoClient('mongodb://pythonuser:mamallama77@ds123003.mlab.com:23003/community-band-finder')
-db = client['community-band-finder']
+url = 'mongodb://' + os.environ['DATABASE_USER'] + ':' + os.environ['DATABASE_PASSWORD']+ '@ds123003.mlab.com:23003/' + os.environ['DATABASE_NAME']
+client = MongoClient(url)
+db = client[os.environ['DATABASE_NAME']]
 collection = db['bands']
-db.authenticate('pythonuser', 'mamallama77')
+db.authenticate(os.environ['DATABASE_USER'], os.environ['DATABASE_PASSWORD'])
 
 # Clear previous collection
 collection.drop()
